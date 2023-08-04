@@ -43,6 +43,8 @@ namespace UELib
 
         float ReadFloat();
 
+		bool ReadBool();
+
         byte ReadByte();
 
         short ReadInt16();
@@ -508,6 +510,11 @@ namespace UELib
             return UR.ReadSingle();
         }
 
+		public bool ReadBool()
+		{
+			return UR.ReadBoolean();
+		}
+
         #region Macros
 
         public ushort ReadUShort()
@@ -610,7 +617,7 @@ namespace UELib
             UR = null;
             UW = null;
         }
-    }
+	}
 
     public class UObjectStream : MemoryStream, IUnrealStream, IUnrealArchive
     {
@@ -665,11 +672,16 @@ namespace UELib
         public float ReadFloat()
         {
             return UR.ReadSingle();
-        }
+		}
 
-        #region Macros
+		public bool ReadBool()
+		{
+			return UR.ReadBoolean();
+		}
 
-        public new byte ReadByte()
+		#region Macros
+
+		public new byte ReadByte()
         {
 #if BINARYMETADATA
             LastPosition = Position;
@@ -801,7 +813,7 @@ namespace UELib
 
             Dispose();
         }
-    }
+	}
 
     /// <summary>
     /// Methods that shouldn't be duplicated between UObjectStream and UPackageStream.
